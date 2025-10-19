@@ -4,16 +4,15 @@ import analyticsLogo from './assets/monitoring-svgrepo-com.svg'
 import './App.css'
 import JsonImportButton, { type ParsedEvent } from './Import'
 import TimeEventGraph from './TimeEventGraph';
+import DurationChart from "./DurationChart";
 
 function App() {
   // const [data, setData] = useState<unknown>(null);
   const [events, setEvents] = useState<ParsedEvent[]>([]);
 
   const handleLoad = (newEvents: ParsedEvent[]) => {
-    console.log("handleLoad: incoming", newEvents.length, "current", events.length);
     setEvents(prev => {
       const merged = [...prev, ...newEvents];
-      // dedupe by ts + source + event
       const seen = new Set<string>();
       const deduped = merged.filter(e => {
         const key = `${e.ts}|${e.source ?? ""}|${e.event}`;
@@ -22,7 +21,6 @@ function App() {
         return true;
       });
       deduped.sort((a, b) => a.ts - b.ts);
-      console.log("handleLoad: merged->deduped", merged.length, "->", deduped.length);
       return deduped;
     });
   };
@@ -38,13 +36,10 @@ function App() {
           Import json-log file to start monitoring...
         </p>
         <div>
-          {/* <JsonImportButton onLoad={(d) => setData(d)} />
-          <pre>{data ? JSON.stringify(data, null, 2) : "No data loaded"}</pre> */}
-          
-          {/* <JsonImportButton onLoad={setEvents} /> */}
           <JsonImportButton onLoad={handleLoad} />
           <div className='graph'>
             <TimeEventGraph events={events} />
+            <DurationChart events={events} />
           </div>
         </div>
       </div>
