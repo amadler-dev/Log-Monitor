@@ -123,13 +123,13 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
 
   const aggregated = React.useMemo(() => groupByPeriod(events, period), [events, period]);
 
-  if (!events.length) return <div className="no-logs">No Logs</div>;
+  if (!events.length) return;// <div className="no-logs">No Logs</div>;
 
   return (
     <div style={{ width: "100%", height: 360 }}>
       <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 8 }}>
         <label style={{ fontSize: 13 }}>Group by:</label>
-        <select value={period} onChange={(e) => setPeriod(e.target.value as Period)}>
+        <select id="event-select" value={period} onChange={(e) => setPeriod(e.target.value as Period)}>
           <option value="hour">Hour</option>
           <option value="day">Day</option>
           <option value="week">Week</option>

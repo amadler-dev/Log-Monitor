@@ -7,7 +7,6 @@
 
 .logo {
   height: 6em;
-  padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
@@ -41,4 +40,62 @@
 }
 .no-logs {
   margin-top: 15px;
+}
+
+
+
+#event-select,
+#duration-select {
+}
+select,
+::picker(select) {
+  appearance: base-select;
+}
+label {
+  width: fit-content;
+  align-self: center;
+}
+select {
+  border: 1px solid #999999;
+  padding: 8px 15px;
+  transition: 0.4s;
+}
+select::picker-icon {
+  color: #999999;
+  transition: 0.4s rotate;
+}
+select:open::picker-icon {
+  rotate: 180deg;
+}
+::picker(select) {
+  border: none;
+}
+option {
+  justify-content: flex-start;
+  gap: 20px;
+  border: 1px solid #999999;
+  padding: 10px;
+  transition: 0.4s;
+}
+option:first-of-type {
+  border-radius: 8px 8px 0 0;
+}
+option:last-of-type {
+  border-radius: 0 0 8px 8px;
+}
+::picker(select) {
+  border-radius: 8px;
+}
+option:not(option:last-of-type) {
+  border-bottom: none;
+}
+option:hover,
+option:focus {
+  background: #383838b2;
+}
+option .icon {
+  text-box: trim-both cap alphabetic;
+}
+option:checked {
+  font-weight: bold;
 }

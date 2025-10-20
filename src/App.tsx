@@ -33,7 +33,7 @@ function App() {
       <h1>Log Monitor</h1>
       <div className="card">
         <p>
-          Import json-log file to start monitoring...
+          Import json log file to start monitoring...
         </p>
         <div>
           <JsonImportButton onLoad={handleLoad} />

@@ -147,8 +147,8 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
   const pairs = React.useMemo(() => computePairs(events), [events]);
   const aggregated = React.useMemo(() => groupDurationsByPeriod(pairs.map(p => ({ startTs: p.startTs, durationMs: p.durationMs })), period), [pairs, period]);
 
-  if (!events.length) return <div>No logs</div>;
-  if (!pairs.length) return <div>No matching start - close pairs found</div>;
+  if (!events.length) return <div className="no-logs">No logs</div>;
+  if (!pairs.length) return <div className="no-logs">No matching start - close pairs found</div>;
 
   return (
     <div style={{ width: "100%", height: 360, marginTop: 70 }}>
@@ -162,7 +162,7 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
         </select>
 
         <label style={{ fontSize: 13, marginLeft: 12 }}>Metric:</label>
-        <select value={metric} onChange={(e) => setMetric(e.target.value as "sum" | "avg" | "count")}>
+        <select id="duration-select" value={metric} onChange={(e) => setMetric(e.target.value as "sum" | "avg" | "count")}>
           <option value="sum">Sum durations (minutes)</option>
           <option value="avg">Average duration (seconds)</option>
           <option value="count">Count pairs</option>
