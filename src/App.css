@@ -43,10 +43,6 @@
 }
 
 
-
-#event-select,
-#duration-select {
-}
 select,
 ::picker(select) {
   appearance: base-select;

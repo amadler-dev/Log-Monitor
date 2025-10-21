@@ -140,13 +140,13 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
         </div>
       </div>
 
-      <ResponsiveContainer>
+      <ResponsiveContainer width={1000} height={400}>
         <BarChart data={aggregated} margin={{ top: 12, right: 24, left: 12, bottom: 80 }}>
           <CartesianGrid stroke="#f0f0f0" />
           <XAxis dataKey="label" angle={-45} textAnchor="end" interval={0} height={70} tick={{ fontSize: 12 }} />
           <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
           <Tooltip
-            // formatter={(value: any, name: string) => [value, name]}
+            formatter={(value: number, name: string) => [value, name]}
             labelFormatter={(label) => `Period: ${label}`}
           />
           <Legend />
