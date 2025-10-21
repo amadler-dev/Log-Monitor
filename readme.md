@@ -22,7 +22,6 @@ Any event label not recognized as "homepage loaded" or "page closed" is treated 
 1. Install deps:
    - Open terminal in project root
    - npm install
-   - npm install recharts
 2. Run dev server:
    - npm run dev
 3. Open the app in your browser (Vite prints the URL).
