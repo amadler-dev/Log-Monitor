@@ -166,7 +166,7 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
   const pairs = React.useMemo(() => computePairs(events), [events]);
   const aggregated = React.useMemo(() => groupDurationsByPeriod(pairs.map(p => ({ startTs: p.startTs, durationMs: p.durationMs })), period), [pairs, period]);
 
-  if (!events.length) return <div className="no-logs">Import json log file to start monitoring...</div>;
+  if (!events.length) return;// <div className="no-logs">Import json log file to start monitoring...</div>;
   if (!pairs.length) return <div className="no-logs">No matching start - close pairs found</div>;
 
   return (

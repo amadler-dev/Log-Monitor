@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# Log Monitor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + TypeScript + Vite app to import browser/event JSON logs and visualize them as interactive timelines and aggregated charts. Designed to help inspect event sequences (e.g. "homepage loaded", "page closed") across one or more log files, and to compute durations between events.
 
-Currently, two official plugins are available:
+## Features
+- Import one or multiple JSON log files (merge + deduplicate).
+- Interactive timeline (Recharts) with per-event markers and brush/zoom.
+- Aggregated stacked bar chart grouped by hour/day/week/month (counts per event type).
+- Duration chart: sum / average / count of time from an event to the next "page closed".
+- Source-aware events (filename stored) and optional filtering by event label / source.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## JSON log format
+Expect a JSON object mapping ISO timestamps to event strings, e.g.:
+{
+  "2025-10-19T14:23:30Z": "homepage loaded",
+  "2025-10-19T14:24:05Z": "page closed"
+}
 
-## React Compiler
+Any event label not recognized as "homepage loaded" or "page closed" is treated as "other".
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Quick start (Windows)
+1. Install deps:
+   - Open terminal in project root (c:\Users\amadl\Hadracha\Log-Monitor)
+   - npm install
+   - npm install recharts
+2. Run dev server:
+   - npm run dev
+3. Open the app in your browser (Vite prints the URL).
 
-## Expanding the ESLint configuration
+## Usage
+- Click "Import JSON files" and select one or more .json files (hold Ctrl / Shift for multiple).
+- Timeline chart: view events across time; use the brush to zoom to a specific range.
+- Aggregate chart: choose grouping (hour/day/week/month) to see stacked counts.
+- Duration chart: compute durations from a start event to the next "page closed"; switch metric (sum / avg / count) and grouping.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tips & Troubleshooting
+- If a file doesn't parse, open DevTools console — the importer logs per-file errors.
+- The importer strips common BOM/comments; for tricky files you can rename or validate JSON with a linter.
+- For large datasets, increase aggregation server-side or reduce bin granularity.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Development notes
+- Built with Vite + React + TypeScript.
+- Charts use Recharts; install via npm if missing.
+- Files are merged and deduplicated by timestamp + source + event.
