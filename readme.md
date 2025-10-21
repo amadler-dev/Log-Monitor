@@ -20,7 +20,7 @@ Any event label not recognized as "homepage loaded" or "page closed" is treated 
 
 ## Quick start (Windows)
 1. Install deps:
-   - Open terminal in project root (c:\Users\amadl\Hadracha\Log-Monitor)
+   - Open terminal in project root
    - npm install
    - npm install recharts
 2. Run dev server:
