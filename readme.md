@@ -17,6 +17,7 @@ Expect a JSON object mapping ISO timestamps to event strings, e.g.:
 - }
 
 Any event label not recognized as "homepage loaded" or "page closed" is treated as "other".
+At the moment this means "formation loaded".
 
 ## Quick start (Windows)
 1. Install deps:
