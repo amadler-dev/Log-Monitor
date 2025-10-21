@@ -20,16 +20,19 @@ const MS = {
   week: 1000 * 60 * 60 * 24 * 7,
 };
 
+
 function floorToHourUTC(t: number) {
   const d = new Date(t);
   d.setUTCMinutes(0, 0, 0);
   return d.getTime();
 }
+
 function floorToDayUTC(t: number) {
   const d = new Date(t);
   d.setUTCHours(0, 0, 0, 0);
   return d.getTime();
 }
+
 function floorToWeekUTC(t: number) {
   const d = new Date(t);
   const isoDay = d.getUTCDay() === 0 ? 7 : d.getUTCDay();
@@ -37,6 +40,7 @@ function floorToWeekUTC(t: number) {
   d.setUTCHours(0, 0, 0, 0);
   return d.getTime();
 }
+
 function floorToMonthUTC(t: number) {
   const d = new Date(t);
   d.setUTCDate(1);
@@ -51,6 +55,7 @@ function labelForPeriod(ts: number, period: Period) {
   if (period === "hour") return d.toISOString().slice(0, 13).replace("T", " ") + ":00Z";
   return d.toISOString().slice(0, 10);
 }
+
 
 // compute pairs: for each non-"page closed" event, find next "page closed"
 function computePairs(events: ParsedEvent[]) {
@@ -76,6 +81,7 @@ function computePairs(events: ParsedEvent[]) {
   }
   return pairs;
 }
+
 
 function groupDurationsByPeriod(pairs: { startTs: number; durationMs: number }[], period: Period) {
 
@@ -105,7 +111,6 @@ function groupDurationsByPeriod(pairs: { startTs: number; durationMs: number }[]
   const min = keys[0];
   const max = keys[keys.length - 1];
   const rows: { ts: number; label: string; sumHours: number; count: number; avgMinutes: number }[] = [];
-
 
   if (period === "month") {
 
@@ -152,6 +157,7 @@ function groupDurationsByPeriod(pairs: { startTs: number; durationMs: number }[]
 
   return rows;
 }
+
 
 export default function DurationChart({ events }: { events: ParsedEvent[] }) {
   const [period, setPeriod] = React.useState<Period>("day");

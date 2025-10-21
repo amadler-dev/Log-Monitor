@@ -21,16 +21,19 @@ const MS = {
   week: 1000 * 60 * 60 * 24 * 7,
 };
 
+
 function floorToHourUTC(t: number) {
   const d = new Date(t);
   d.setUTCMinutes(0, 0, 0);
   return d.getTime();
 }
+
 function floorToDayUTC(t: number) {
   const d = new Date(t);
   d.setUTCHours(0, 0, 0, 0);
   return d.getTime();
 }
+
 function floorToWeekUTC(t: number) {
   const d = new Date(t);
   // ISO week start Monday
@@ -39,6 +42,7 @@ function floorToWeekUTC(t: number) {
   d.setUTCHours(0, 0, 0, 0);
   return d.getTime();
 }
+
 function floorToMonthUTC(t: number) {
   const d = new Date(t);
   d.setUTCDate(1);
@@ -61,6 +65,7 @@ function labelForPeriod(ts: number, period: Period) {
   // day
   return d.toISOString().slice(0, 10);
 }
+
 
 function groupByPeriod(events: ParsedEvent[], period: Period) {
   const map = new Map<number, { homepage: number; closed: number; other: number }>();
@@ -87,12 +92,11 @@ function groupByPeriod(events: ParsedEvent[], period: Period) {
   const keys = Array.from(map.keys()).sort((a, b) => a - b);
   const min = keys[0];
   const max = keys[keys.length - 1];
-  const step =
-    period === "hour" ? MS.hour : period === "week" ? MS.week : period === "month" ? undefined : MS.day;
-
+  const step = period === "hour" ? MS.hour : period === "week" ? MS.week : period === "month" ? undefined : MS.day;
   const rows: { ts: number; label: string; homepage: number; closed: number; other: number }[] = [];
 
   if (period === "month") {
+
     // iterate months
     let cur = floorToMonthUTC(min);
     const end = floorToMonthUTC(max);
@@ -104,9 +108,12 @@ function groupByPeriod(events: ParsedEvent[], period: Period) {
       cur = d.getTime();
       if (rows.length > 1000) break;
     }
+
   } else {
+
     let cur = floor(min);
     const end = floor(max);
+    
     while (cur <= end) {
       const v = map.get(cur) ?? { homepage: 0, closed: 0, other: 0 };
       rows.push({ ts: cur, label: labelForPeriod(cur, period), homepage: v.homepage, closed: v.closed, other: v.other });
@@ -118,9 +125,9 @@ function groupByPeriod(events: ParsedEvent[], period: Period) {
   return rows;
 }
 
+
 export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
   const [period, setPeriod] = React.useState<Period>("day");
-
   const aggregated = React.useMemo(() => groupByPeriod(events, period), [events, period]);
 
   if (!events.length) return;// <div className="no-logs">No Logs</div>;
@@ -159,4 +166,3 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
     </div>
   );
 }
-// ...existing code...
