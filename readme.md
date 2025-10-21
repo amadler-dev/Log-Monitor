@@ -11,10 +11,10 @@ A small React + TypeScript + Vite app to import browser/event JSON logs and visu
 
 ## JSON log format
 Expect a JSON object mapping ISO timestamps to event strings, e.g.:
-{
-  "2025-10-19T14:23:30Z": "homepage loaded",
-  "2025-10-19T14:24:05Z": "page closed"
-}
+- {
+-   "2025-10-19T14:23:30Z": "homepage loaded",
+-   "2025-10-19T14:24:05Z": "page closed"
+- }
 
 Any event label not recognized as "homepage loaded" or "page closed" is treated as "other".
 
