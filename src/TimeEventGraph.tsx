@@ -68,22 +68,25 @@ function labelForPeriod(ts: number, period: Period) {
 
 
 function groupByPeriod(events: ParsedEvent[], period: Period) {
-  const map = new Map<number, { homepage: number; closed: number; other: number }>();
+  const map = new Map<number, { page_view: number; click: number; session: number; other: number }>();
   const floor =
     period === "hour"
       ? floorToHourUTC
       : period === "week"
-      ? floorToWeekUTC
-      : period === "month"
-      ? floorToMonthUTC
-      : floorToDayUTC;
+        ? floorToWeekUTC
+        : period === "month"
+          ? floorToMonthUTC
+          : floorToDayUTC;
 
   for (const e of events) {
     const k = floor(e.ts);
-    const entry = map.get(k) ?? { homepage: 0, closed: 0, other: 0 };
-    if (e.homepageLoaded) entry.homepage += 1;
-    else if (e.pageClosed) entry.closed += 1;
+    const entry = map.get(k) ?? { page_view: 0, click: 0, session: 0, other: 0 };
+
+    if (e.type === 'page_view') entry.page_view += 1;
+    else if (e.type === 'click') entry.click += 1;
+    else if (e.type === 'session_start') entry.session += 1;
     else entry.other += 1;
+
     map.set(k, entry);
   }
 
@@ -93,7 +96,7 @@ function groupByPeriod(events: ParsedEvent[], period: Period) {
   const min = keys[0];
   const max = keys[keys.length - 1];
   const step = period === "hour" ? MS.hour : period === "week" ? MS.week : period === "month" ? undefined : MS.day;
-  const rows: { ts: number; label: string; homepage: number; closed: number; other: number }[] = [];
+  const rows: { ts: number; label: string; page_view: number; click: number; session: number; other: number }[] = [];
 
   if (period === "month") {
 
@@ -101,8 +104,8 @@ function groupByPeriod(events: ParsedEvent[], period: Period) {
     let cur = floorToMonthUTC(min);
     const end = floorToMonthUTC(max);
     while (cur <= end) {
-      const v = map.get(cur) ?? { homepage: 0, closed: 0, other: 0 };
-      rows.push({ ts: cur, label: labelForPeriod(cur, "month"), homepage: v.homepage, closed: v.closed, other: v.other });
+      const v = map.get(cur) ?? { page_view: 0, click: 0, session: 0, other: 0 };
+      rows.push({ ts: cur, label: labelForPeriod(cur, "month"), page_view: v.page_view, click: v.click, session: v.session, other: v.other });
       const d = new Date(cur);
       d.setUTCMonth(d.getUTCMonth() + 1);
       cur = d.getTime();
@@ -113,10 +116,10 @@ function groupByPeriod(events: ParsedEvent[], period: Period) {
 
     let cur = floor(min);
     const end = floor(max);
-    
+
     while (cur <= end) {
-      const v = map.get(cur) ?? { homepage: 0, closed: 0, other: 0 };
-      rows.push({ ts: cur, label: labelForPeriod(cur, period), homepage: v.homepage, closed: v.closed, other: v.other });
+      const v = map.get(cur) ?? { page_view: 0, click: 0, session: 0, other: 0 };
+      rows.push({ ts: cur, label: labelForPeriod(cur, period), page_view: v.page_view, click: v.click, session: v.session, other: v.other });
       cur = (step ?? MS.day) + cur;
       if (rows.length > 5000) break;
     }
@@ -157,9 +160,10 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
             labelFormatter={(label) => `Period: ${label}`}
           />
           <Legend />
-          <Bar dataKey="homepage" name="homepage loaded" stackId="a" fill="#2e7d32" />
-          <Bar dataKey="closed" name="page closed" stackId="a" fill="#c62828" />
-          <Bar dataKey="other" name="formation loaded" stackId="a" fill="#8884d8" />
+          <Bar dataKey="page_view" name="Page Views" stackId="a" fill="#2e7d32" />
+          <Bar dataKey="click" name="Clicks" stackId="a" fill="#1976d2" />
+          <Bar dataKey="session" name="Sessions" stackId="a" fill="#ff8f00" />
+          <Bar dataKey="other" name="Other" stackId="a" fill="#8884d8" />
           <Brush dataKey="label" height={40} stroke="#8884d8" travellerWidth={10} />
         </BarChart>
       </ResponsiveContainer>

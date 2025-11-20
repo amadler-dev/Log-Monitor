@@ -1,0 +1,121 @@
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:04:36.522Z","url":"/test1/"}
+{"type":"page_view","page":"12-13","duration":1,"timestamp":"2025-11-20T08:04:36.523Z","url":"/test1/"}
+{"type":"click","elementId":"editSpan","elementText":"Click Here","timestamp":"2025-11-20T08:04:43.963Z","url":"/test1/"}
+{"type":"click","elementId":"BUTTON","elementText":"✖","timestamp":"2025-11-20T08:04:52.081Z","url":"/test1/"}
+{"type":"page_view","page":"12-13","duration":20,"event":"visibility_hidden","timestamp":"2025-11-20T08:04:56.535Z","url":"/test1/"}
+{"type":"page_view","page":"12-13","duration":33,"timestamp":"2025-11-20T08:05:29.194Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":1,"event":"visibility_hidden","timestamp":"2025-11-20T08:05:30.196Z","url":"/test1/"}
+{"type":"click","elementId":"bookButton","elementText":"שד\"ח מרגמה","timestamp":"2025-11-20T08:05:34.034Z","url":"/homepage"}
+{"type":"page_view","page":"1","duration":3,"timestamp":"2025-11-20T08:05:37.760Z","url":"/test2/"}
+{"type":"page_view","page":"1","duration":0,"timestamp":"2025-11-20T08:05:38.249Z","url":"/test2/"}
+{"type":"page_view","page":"2-3","duration":0,"timestamp":"2025-11-20T08:05:38.596Z","url":"/test2/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:05:39.818Z","url":"/test2/"}
+{"type":"page_view","page":"4-5","duration":1,"timestamp":"2025-11-20T08:05:39.820Z","url":"/test2/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:05:40.242Z","url":"/test2/"}
+{"type":"page_view","page":"6-7","duration":0,"timestamp":"2025-11-20T08:05:40.243Z","url":"/test2/"}
+{"type":"page_view","page":"4-5","duration":1,"timestamp":"2025-11-20T08:05:40.970Z","url":"/test2/"}
+{"type":"page_view","page":"1","duration":1,"event":"visibility_hidden","timestamp":"2025-11-20T08:05:42.366Z","url":"/test2/"}
+{"type":"click","elementId":"bookButton","elementText":"מענ\"ק","timestamp":"2025-11-20T08:05:45.666Z","url":"/homepage"}
+{"type":"click","elementId":"button_con","elementText":"Click Here","timestamp":"2025-11-20T08:05:48.756Z","url":"/test1/"}
+{"type":"click","elementId":"BUTTON","elementText":"✖","timestamp":"2025-11-20T08:05:50.226Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":4,"timestamp":"2025-11-20T08:05:50.633Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":0,"timestamp":"2025-11-20T08:05:50.786Z","url":"/test1/"}
+{"type":"page_view","page":"2-3","duration":1,"event":"visibility_hidden","timestamp":"2025-11-20T08:05:51.595Z","url":"/test1/"}
+{"type":"click","elementId":"bookButton","elementText":"שד\"ח מרגמה","timestamp":"2025-11-20T08:07:14.834Z","url":"/homepage"}
+{"type":"page_view","page":"1","duration":2,"event":"visibility_hidden","timestamp":"2025-11-20T08:07:17.064Z","url":"/test2/"}
+{"type":"click","elementId":"books","elementText":"שד\"ח מרגמה\nמענ\"ק","timestamp":"2025-11-20T08:11:26.049Z","url":"/homepage"}
+{"type":"click","elementId":"books","elementText":"שד\"ח מרגמה\nמענ\"ק","timestamp":"2025-11-20T08:11:29.689Z","url":"/homepage"}
+{"type":"click","elementId":"books","elementText":"שד\"ח מרגמה\nמענ\"ק","timestamp":"2025-11-20T08:11:30.809Z","url":"/homepage"}
+{"type":"click","elementId":"books","elementText":"שד\"ח מרגמה\nמענ\"ק","timestamp":"2025-11-20T08:11:32.296Z","url":"/homepage"}
+{"type":"click","elementId":"H1","elementText":"מערכת למידה צי\"ד","timestamp":"2025-11-20T08:11:35.472Z","url":"/homepage"}
+{"type":"click","elementId":"books","elementText":"שד\"ח מרגמה\nמענ\"ק","timestamp":"2025-11-20T08:11:44.705Z","url":"/homepage"}
+{"type":"click","elementId":"H1","elementText":"מערכת למידה צי\"ד","timestamp":"2025-11-20T08:12:57.080Z","url":"/homepage"}
+{"type":"click","elementId":"H1","elementText":"מערכת למידה צי\"ד","timestamp":"2025-11-20T08:12:57.219Z","url":"/homepage"}
+{"type":"click","elementId":"learning-body","elementText":"מערכת למידה צי\"ד\nשמור\nמערכת למידה צי\"ד\nבחרו מערכת\n","timestamp":"2025-11-20T08:13:00.314Z","url":"/homepage"}
+{"type":"click","elementId":"learning-body","elementText":"מערכת למידה צי\"ד\nשמור\nמערכת למידה צי\"ד\nבחרו מערכת\n","timestamp":"2025-11-20T08:13:01.257Z","url":"/homepage"}
+{"type":"click","elementId":"H1","elementText":"מערכת למידה צי\"ד","timestamp":"2025-11-20T08:13:12.625Z","url":"/homepage"}
+{"type":"click","elementId":"H2","elementText":"בחרו מערכת","timestamp":"2025-11-20T08:13:13.169Z","url":"/homepage"}
+{"type":"click","elementId":"H2","elementText":"בחרו מערכת","timestamp":"2025-11-20T08:13:13.649Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:15:26.617Z","url":"/homepage"}
+{"type":"click","elementId":"bookButton","elementText":"מענ\"ק","timestamp":"2025-11-20T08:15:42.737Z","url":"/homepage"}
+{"type":"session_end","duration":16,"timestamp":"2025-11-20T08:15:42.807Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:15:43.393Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":58,"event":"visibility_hidden","timestamp":"2025-11-20T08:16:41.140Z","url":"/test1/"}
+{"type":"session_end","duration":58,"timestamp":"2025-11-20T08:16:41.142Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":361,"event":"visibility_hidden","timestamp":"2025-11-20T08:22:42.478Z","url":"/test1/"}
+{"type":"session_end","duration":420,"timestamp":"2025-11-20T08:22:42.479Z","url":"/test1/"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:22:42.661Z","url":"/homepage"}
+{"type":"session_end","duration":8,"timestamp":"2025-11-20T08:22:50.705Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:22:50.754Z","url":"/homepage"}
+{"type":"session_end","duration":8,"timestamp":"2025-11-20T08:22:58.165Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:22:58.341Z","url":"/homepage"}
+{"type":"session_end","duration":10,"timestamp":"2025-11-20T08:23:08.035Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:23:11.366Z","url":"/homepage"}
+{"type":"click","elementId":"bookButton","elementText":"מענ\"ק","timestamp":"2025-11-20T08:23:21.058Z","url":"/homepage"}
+{"type":"page_view","page":"1","duration":12,"event":"visibility_hidden","timestamp":"2025-11-20T08:23:33.890Z","url":"/test1/"}
+{"type":"session_end","duration":13,"timestamp":"2025-11-20T08:23:33.891Z","url":"/test1/"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:23:34.044Z","url":"/homepage"}
+{"type":"click","elementId":"bookButton","elementText":"מענ\"ק","timestamp":"2025-11-20T08:23:57.953Z","url":"/homepage"}
+{"type":"click","elementId":"button_text","elementText":"Click Here","timestamp":"2025-11-20T08:24:01.202Z","url":"/test1/"}
+{"type":"click","elementId":"BUTTON","elementText":"✖","timestamp":"2025-11-20T08:24:04.059Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":8,"timestamp":"2025-11-20T08:24:06.833Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":1,"timestamp":"2025-11-20T08:24:08.225Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:13.272Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:16.929Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:19.913Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:24.418Z","url":"/test1/"}
+{"type":"page_view","page":"2-3","duration":16,"timestamp":"2025-11-20T08:24:24.419Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:27.081Z","url":"/test1/"}
+{"type":"page_view","page":"1","duration":3,"timestamp":"2025-11-20T08:24:27.083Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:29.857Z","url":"/test1/"}
+{"type":"page_view","page":"2-3","duration":3,"timestamp":"2025-11-20T08:24:29.858Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:31.041Z","url":"/test1/"}
+{"type":"page_view","page":"4-5","duration":1,"timestamp":"2025-11-20T08:24:31.042Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:31.713Z","url":"/test1/"}
+{"type":"page_view","page":"6-7","duration":1,"timestamp":"2025-11-20T08:24:31.714Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:32.169Z","url":"/test1/"}
+{"type":"page_view","page":"8-9","duration":0,"timestamp":"2025-11-20T08:24:32.170Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:32.601Z","url":"/test1/"}
+{"type":"page_view","page":"10-11","duration":0,"timestamp":"2025-11-20T08:24:32.602Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:33.025Z","url":"/test1/"}
+{"type":"page_view","page":"12-13","duration":0,"timestamp":"2025-11-20T08:24:33.026Z","url":"/test1/"}
+{"type":"click","elementId":"button","elementText":"","timestamp":"2025-11-20T08:24:33.513Z","url":"/test1/"}
+{"type":"page_view","page":"14-15","duration":0,"timestamp":"2025-11-20T08:24:33.514Z","url":"/test1/"}
+{"type":"page_view","page":"16-17","duration":3,"event":"visibility_hidden","timestamp":"2025-11-20T08:24:36.390Z","url":"/test1/"}
+{"type":"session_end","duration":38,"timestamp":"2025-11-20T08:24:36.390Z","url":"/test1/"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:24:36.463Z","url":"/homepage"}
+{"type":"session_end","duration":0,"timestamp":"2025-11-20T08:24:36.710Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:24:39.419Z","url":"/homepage"}
+{"type":"click","elementId":"bookButton","elementText":"שד\"ח מרגמה","timestamp":"2025-11-20T08:24:46.632Z","url":"/homepage"}
+{"type":"click","elementId":"A","elementText":"https://www.flipbuilder.com/","timestamp":"2025-11-20T08:24:49.609Z","url":"/test2/"}
+{"type":"page_view","page":"1","duration":1,"event":"visibility_hidden","timestamp":"2025-11-20T08:24:49.686Z","url":"/test2/"}
+{"type":"session_end","duration":3,"timestamp":"2025-11-20T08:24:49.688Z","url":"/test2/"}
+{"type":"click","elementId":"flip_button_right button","elementText":"","timestamp":"2025-11-20T08:24:52.657Z","url":"/test2/"}
+{"type":"page_view","page":"1","duration":3,"timestamp":"2025-11-20T08:24:52.659Z","url":"/test2/"}
+{"type":"click","elementId":"flip_button_right button","elementText":"","timestamp":"2025-11-20T08:24:53.099Z","url":"/test2/"}
+{"type":"page_view","page":"1","duration":0,"timestamp":"2025-11-20T08:24:53.100Z","url":"/test2/"}
+{"type":"click","elementId":"flip_button_right button","elementText":"","timestamp":"2025-11-20T08:24:53.465Z","url":"/test2/"}
+{"type":"page_view","page":"2-3","duration":0,"timestamp":"2025-11-20T08:24:53.466Z","url":"/test2/"}
+{"type":"click","elementId":"flip_button_right button","elementText":"","timestamp":"2025-11-20T08:24:53.641Z","url":"/test2/"}
+{"type":"page_view","page":"4-5","duration":0,"timestamp":"2025-11-20T08:24:53.642Z","url":"/test2/"}
+{"type":"click","elementId":"flip_button_right button","elementText":"","timestamp":"2025-11-20T08:24:53.819Z","url":"/test2/"}
+{"type":"page_view","page":"6-7","duration":0,"timestamp":"2025-11-20T08:24:53.820Z","url":"/test2/"}
+{"type":"page_view","page":"6-7","duration":1,"timestamp":"2025-11-20T08:24:54.809Z","url":"/test2/"}
+{"type":"click","elementId":"point","elementText":"","timestamp":"2025-11-20T08:24:54.820Z","url":"/test2/"}
+{"type":"page_view","page":"8-9","duration":8,"timestamp":"2025-11-20T08:25:02.849Z","url":"/test2/"}
+{"type":"click","elementId":"point","elementText":"","timestamp":"2025-11-20T08:25:02.854Z","url":"/test2/"}
+{"type":"page_view","page":"22-23","duration":5,"timestamp":"2025-11-20T08:25:07.441Z","url":"/test2/"}
+{"type":"click","elementId":"point","elementText":"","timestamp":"2025-11-20T08:25:07.447Z","url":"/test2/"}
+{"type":"page_view","page":"24","duration":3,"timestamp":"2025-11-20T08:25:10.664Z","url":"/test2/"}
+{"type":"page_view","page":"16-17","duration":0,"event":"visibility_hidden","timestamp":"2025-11-20T08:25:10.920Z","url":"/test2/"}
+{"type":"session_end","duration":24,"timestamp":"2025-11-20T08:25:10.921Z","url":"/test2/"}
+{"type":"page_view","page":"1","duration":1,"event":"visibility_hidden","timestamp":"2025-11-20T08:25:12.442Z","url":"/test2/"}
+{"type":"session_end","duration":2,"timestamp":"2025-11-20T08:25:12.442Z","url":"/test2/"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:25:12.488Z","url":"/homepage"}
+{"type":"session_end","duration":1,"timestamp":"2025-11-20T08:25:13.595Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:25:13.643Z","url":"/homepage"}
+{"type":"session_end","duration":1,"timestamp":"2025-11-20T08:25:14.216Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:25:14.312Z","url":"/homepage"}
+{"type":"session_end","duration":0,"timestamp":"2025-11-20T08:25:14.368Z","url":"/homepage"}
+{"type":"session_start","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36","screenResolution":"1920x1080","timestamp":"2025-11-20T08:25:14.534Z","url":"/homepage"}
+{"type":"session_end","duration":1,"timestamp":"2025-11-20T08:25:15.533Z","url":"/homepage"}

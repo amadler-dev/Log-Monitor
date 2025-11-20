@@ -3,24 +3,16 @@ import React from "react";
 export type ParsedEvent = {
   time: string;
   ts: number;
-  event: string;
-  homepageLoaded: number;
-  pageClosed: number;
+  type: 'click' | 'page_view' | 'session_start' | 'session_end';
+  url: string;
+  page?: string;
+  duration?: number;
+  elementId?: string;
+  elementText?: string;
+  userAgent?: string;
+  screenResolution?: string;
   source?: string;
 };
-
-function sanitizeMaybeJson(text: string) {
-  // remove BOM
-  text = text.replace(/^\uFEFF/, "");
-  // If file has leading non-JSON metadata lines (like "// filepath: ..."), strip lines starting with //
-  text = text.replace(/^[ \t]*\/\/.*$/gm, "");
-  // strip block comments
-  text = text.replace(/\/\*[\s\S]*?\*\//g, "");
-  // if there is garbage before the first { or [, cut it off (common when editor inserts a header)
-  const first = text.search(/[{[]/);
-  if (first > 0) text = text.slice(first);
-  return text.trim();
-}
 
 export default function JsonImportButton({ onLoad }: { onLoad: (data: ParsedEvent[]) => void }) {
   const fileInputRef = React.useRef<HTMLInputElement | null>(null);
@@ -35,21 +27,31 @@ export default function JsonImportButton({ onLoad }: { onLoad: (data: ParsedEven
     const results = await Promise.allSettled(
       fileArr.map(async (file) => {
         const text = await file.text();
-        const clean = sanitizeMaybeJson(text);
-        const obj = JSON.parse(clean) as Record<string, string>;
-        const parsed: ParsedEvent[] = Object.entries(obj)
-          .map(([time, ev]) => {
-            const ts = Date.parse(time);
+        const lines = text.split(/\r?\n/).filter(line => line.trim() !== "");
+
+        const parsed: ParsedEvent[] = lines.map(line => {
+          try {
+            const obj = JSON.parse(line);
+            const ts = Date.parse(obj.timestamp);
             return {
-              time,
+              time: obj.timestamp,
               ts,
-              event: ev,
-              homepageLoaded: ev === "homepage loaded" ? 1 : 0,
-              pageClosed: ev === "page closed" ? 1 : 0,
+              type: obj.type,
+              url: obj.url,
+              page: obj.page,
+              duration: obj.duration,
+              elementId: obj.elementId,
+              elementText: obj.elementText,
+              userAgent: obj.userAgent,
+              screenResolution: obj.screenResolution,
               source: file.name,
-            };
-          })
-          .filter(p => !Number.isNaN(p.ts));
+            } as ParsedEvent;
+          } catch (e) {
+            console.error("Failed to parse line:", line, e);
+            return null;
+          }
+        }).filter((p): p is ParsedEvent => p !== null && !Number.isNaN(p.ts));
+
         return { file: file.name, parsed };
       })
     );
@@ -60,9 +62,7 @@ export default function JsonImportButton({ onLoad }: { onLoad: (data: ParsedEven
     for (const r of results) {
       if (r.status === "fulfilled") {
         allParsed.push(...r.value.parsed);
-
         console.log(`Imported ${r.value.parsed.length} events from ${r.value.file}`);
-        
       } else {
         console.error("Failed to parse a file:", r.reason);
         errors.push(String(r.reason?.message ?? r.reason ?? "Unknown error"));
@@ -95,12 +95,12 @@ export default function JsonImportButton({ onLoad }: { onLoad: (data: ParsedEven
       <input
         ref={fileInputRef}
         type="file"
-        accept="application/json"
+        accept=".json,.jsonl"
         multiple
         style={{ display: "none" }}
         onChange={handleFileChange}
       />
-      <button onClick={openFilePicker}>Import JSON files</button>
+      <button onClick={openFilePicker}>Import JSON/JSONL files</button>
     </>
   );
 }

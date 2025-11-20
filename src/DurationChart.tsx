@@ -35,6 +35,7 @@ function floorToDayUTC(t: number) {
 
 function floorToWeekUTC(t: number) {
   const d = new Date(t);
+  // ISO week start Monday
   const isoDay = d.getUTCDay() === 0 ? 7 : d.getUTCDay();
   d.setUTCDate(d.getUTCDate() - (isoDay - 1));
   d.setUTCHours(0, 0, 0, 0);
@@ -57,57 +58,35 @@ function labelForPeriod(ts: number, period: Period) {
 }
 
 
-// compute pairs: for each non-"page closed" event, find next "page closed"
-function computePairs(events: ParsedEvent[]) {
-
-  const pairs: { startTs: number; closeTs: number; durationMs: number; label: string; source?: string }[] = [];
-
-  for (let i = 0; i < events.length; i++) {
-    const e = events[i];
-
-    if (e.pageClosed) 
-        continue; // skip closes as starts
-
-    // find next page closed
-    for (let j = i + 1; j < events.length; j++) {
-      if (events[j].pageClosed) {
-        const dur = events[j].ts - e.ts;
-        if (dur >= 0) {
-          pairs.push({ startTs: e.ts, closeTs: events[j].ts, durationMs: dur, label: e.event, source: e.source });
-        }
-        break;
-      }
-    }
-  }
-  return pairs;
-}
-
-
-function groupDurationsByPeriod(pairs: { startTs: number; durationMs: number }[], period: Period) {
+function groupDurationsByPeriod(events: ParsedEvent[], period: Period) {
 
   const map = new Map<number, { sumHs: number; count: number }>();
   const floor =
     period === "hour"
       ? floorToHourUTC
       : period === "week"
-      ? floorToWeekUTC
-      : period === "month"
-      ? floorToMonthUTC
-      : floorToDayUTC;
+        ? floorToWeekUTC
+        : period === "month"
+          ? floorToMonthUTC
+          : floorToDayUTC;
 
-  for (const p of pairs) {
-    const k = floor(p.startTs);
+  for (const e of events) {
+    if (typeof e.duration !== 'number' || e.duration <= 0) continue;
+
+    const k = floor(e.ts);
     const cur = map.get(k) ?? { sumHs: 0, count: 0 };
-    cur.sumHs += p.durationMs;
+    cur.sumHs += e.duration * 1000; // duration is in seconds in jsonl
     cur.count += 1;
     map.set(k, cur);
   }
 
-  if (pairs.length === 0) 
+  if (events.length === 0)
     return [];
 
 
   const keys = Array.from(map.keys()).sort((a, b) => a - b);
+  if (keys.length === 0) return [];
+
   const min = keys[0];
   const max = keys[keys.length - 1];
   const rows: { ts: number; label: string; sumHours: number; count: number; avgMinutes: number }[] = [];
@@ -163,11 +142,10 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
   const [period, setPeriod] = React.useState<Period>("day");
   const [metric, setMetric] = React.useState<"sum" | "avg" | "count">("sum");
 
-  const pairs = React.useMemo(() => computePairs(events), [events]);
-  const aggregated = React.useMemo(() => groupDurationsByPeriod(pairs.map(p => ({ startTs: p.startTs, durationMs: p.durationMs })), period), [pairs, period]);
+  const aggregated = React.useMemo(() => groupDurationsByPeriod(events, period), [events, period]);
 
   if (!events.length) return;// <div className="no-logs">Import json log file to start monitoring...</div>;
-  if (!pairs.length) return <div className="no-logs">No matching start - close pairs found</div>;
+  // if (!pairs.length) return <div className="no-logs">No matching start - close pairs found</div>;
 
   return (
     <div style={{ width: "100%", height: 360, marginTop: 100 }}>
@@ -184,11 +162,11 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
         <select id="duration-select" value={metric} onChange={(e) => setMetric(e.target.value as "sum" | "avg" | "count")}>
           <option value="sum">Sum durations (hours)</option>
           <option value="avg">Average duration (minutes)</option>
-          <option value="count">Count pairs</option>
+          <option value="count">Count events with duration</option>
         </select>
 
         <div style={{ marginLeft: "auto", fontSize: 12, color: "#555" }}>
-          pairs {pairs.length} · bins {aggregated.length}
+          bins {aggregated.length}
         </div>
       </div>
 
@@ -199,7 +177,7 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
           <YAxis tick={{ fontSize: 12 }} />
           <Tooltip
             formatter={(value: number, name: string) => {
-              if (name === "sumHours") return [`${value} min`, "sum"];
+              if (name === "sumHours") return [`${value} h`, "sum"];
               if (name === "avgMinutes") return [`${value} s`, "avg"];
               if (name === "count") return [value, "count"];
               return [value, name];
