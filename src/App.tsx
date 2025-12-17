@@ -13,6 +13,7 @@ import SessionChart from "./SessionChart";
 import ClicksChart from "./ClicksChart";
 import DeviceChart from "./DeviceChart";
 import ResolutionChart from "./ResolutionChart";
+import EngagementChart from "./EngagementChart";
 
 function App() {
   const [events, setEvents] = useState<ParsedEvent[]>([]);
@@ -128,6 +129,11 @@ function App() {
             <div className="card chart-card full-width">
               <h3>Screen Resolutions</h3>
               <ResolutionChart events={events} />
+            </div>
+
+            <div className="card chart-card full-width">
+              <h3>Engagement (Active vs Background)</h3>
+              <EngagementChart events={events} />
             </div>
           </section>
         </>

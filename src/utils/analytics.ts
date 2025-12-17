@@ -10,7 +10,52 @@ export type ParsedEvent = {
     userAgent?: string;
     screenResolution?: string;
     source?: string;
+    event?: string;
 };
+
+// ... existing code ...
+
+export function calculateSummaryStats(events: ParsedEvent[]) {
+    // ... existing ...
+    const sessions = events.filter(e => e.type === 'session_start');
+    const sessionEnds = events.filter(e => e.type === 'session_end' && e.duration);
+
+    const totalDuration = sessionEnds.reduce((acc, curr) => acc + (curr.duration || 0), 0);
+    const avgDuration = sessions.length ? totalDuration / sessions.length : 0;
+
+    const pageViews = events.filter(e => e.type === 'page_view').length;
+
+    return {
+        totalSessions: sessions.length,
+        avgSessionDuration: formatDuration(avgDuration),
+        totalPageViews: pageViews,
+        totalEvents: events.length
+    };
+}
+
+export function calculateEngagementStats(events: ParsedEvent[]) {
+    // 'visibility_hidden' usually has a duration attached (time spent hidden)
+    // or sometimes it's just a marker. Looking at logs, it has "duration".
+
+    const backgroundEvents = events.filter(e => e.event === 'visibility_hidden');
+    const totalBackgroundTime = backgroundEvents.reduce((acc, curr) => acc + (curr.duration || 0), 0);
+    const totalSwitches = backgroundEvents.length;
+
+    // Active time = Total Session Time - Background Time
+    // We need total session time.
+    const sessionEnds = events.filter(e => e.type === 'session_end' && e.duration);
+    const totalSessionTime = sessionEnds.reduce((acc, curr) => acc + (curr.duration || 0), 0);
+
+    // Safety check: Active time shouldn't be negative (if logs are weird)
+    const activeTime = Math.max(0, totalSessionTime - totalBackgroundTime);
+
+    return {
+        totalSwitches,
+        totalBackgroundTime,
+        activeTime,
+        totalSessionTime
+    };
+}
 
 export type Period = "hour" | "day" | "week" | "month";
 
@@ -125,25 +170,7 @@ export function groupByPeriod(events: ParsedEvent[], period: Period) {
     return rows;
 }
 
-export function calculateSummaryStats(events: ParsedEvent[]) {
-    const sessions = events.filter(e => e.type === 'session_start');
-    const sessionEnds = events.filter(e => e.type === 'session_end' && e.duration);
 
-    // Calculate total duration (in seconds)
-    // We prefer session_end duration if available, otherwise we try to infer?
-    // Actually the log has session_end with duration.
-    const totalDuration = sessionEnds.reduce((acc, curr) => acc + (curr.duration || 0), 0);
-    const avgDuration = sessions.length ? totalDuration / sessions.length : 0;
-
-    const pageViews = events.filter(e => e.type === 'page_view').length;
-
-    return {
-        totalSessions: sessions.length,
-        avgSessionDuration: formatDuration(avgDuration),
-        totalPageViews: pageViews,
-        totalEvents: events.length
-    };
-}
 
 export function parseUserAgent(ua: string) {
     let browser = "Unknown";
