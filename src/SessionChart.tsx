@@ -1,5 +1,6 @@
 import React from "react";
-import type { ParsedEvent } from "./Import";
+import type { ParsedEvent, Period } from "./utils/analytics";
+import { floorToDayUTC, floorToWeekUTC, labelForPeriod } from "./utils/analytics";
 import {
     ResponsiveContainer,
     BarChart,
@@ -9,31 +10,10 @@ import {
     Tooltip,
     Bar,
     Legend,
-    Brush,
 } from "recharts";
 
-type Period = "day" | "week";
-
-function floorToDayUTC(t: number) {
-    const d = new Date(t);
-    d.setUTCHours(0, 0, 0, 0);
-    return d.getTime();
-}
-
-function floorToWeekUTC(t: number) {
-    const d = new Date(t);
-    const isoDay = d.getUTCDay() === 0 ? 7 : d.getUTCDay();
-    d.setUTCDate(d.getUTCDate() - (isoDay - 1));
-    d.setUTCHours(0, 0, 0, 0);
-    return d.getTime();
-}
-
-function labelForPeriod(ts: number, period: Period) {
-    const d = new Date(ts);
-    return d.toISOString().slice(0, 10);
-}
-
 export default function SessionChart({ events }: { events: ParsedEvent[] }) {
+    // We only want day/week for this chart, casting is fine or we can limit the UI
     const [period, setPeriod] = React.useState<Period>("day");
 
     const aggregated = React.useMemo(() => {
@@ -63,24 +43,30 @@ export default function SessionChart({ events }: { events: ParsedEvent[] }) {
     if (!events.length) return null;
 
     return (
-        <div style={{ width: "100%", height: 400, marginTop: 20 }}>
+        <div style={{ width: "100%", height: "100%" }}>
             <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 8 }}>
                 <h3>Session Statistics</h3>
-                <select value={period} onChange={(e) => setPeriod(e.target.value as Period)}>
+                <select
+                    value={period}
+                    onChange={(e) => setPeriod(e.target.value as Period)}
+                    style={{ borderRadius: 6, border: '1px solid #ccc', padding: '4px 8px' }}
+                >
                     <option value="day">Daily</option>
                     <option value="week">Weekly</option>
                 </select>
             </div>
-            <ResponsiveContainer width="100%" height={350}>
+            <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={aggregated} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="label" />
-                    <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
-                    <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
-                    <Tooltip />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                    <XAxis dataKey="label" tick={{ fontSize: 12, fill: '#888' }} />
+                    <YAxis yAxisId="left" orientation="left" stroke="#8884d8" tick={{ fontSize: 12 }} />
+                    <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" tick={{ fontSize: 12 }} />
+                    <Tooltip
+                        contentStyle={{ borderRadius: 8, border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}
+                    />
                     <Legend />
-                    <Bar yAxisId="left" dataKey="count" name="Session Count" fill="#8884d8" />
-                    <Bar yAxisId="right" dataKey="avgDuration" name="Avg Duration (min)" fill="#82ca9d" />
+                    <Bar yAxisId="left" dataKey="count" name="Session Count" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                    <Bar yAxisId="right" dataKey="avgDuration" name="Avg Duration (min)" fill="#82ca9d" radius={[4, 4, 0, 0]} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

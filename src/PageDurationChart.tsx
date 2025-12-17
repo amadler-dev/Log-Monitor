@@ -1,5 +1,5 @@
 import React from "react";
-import type { ParsedEvent } from "./Import";
+import type { ParsedEvent } from "./utils/analytics";
 import {
     ResponsiveContainer,
     BarChart,
@@ -9,7 +9,6 @@ import {
     Tooltip,
     Bar,
     Legend,
-    Brush,
 } from "recharts";
 
 export default function PageDurationChart({ events }: { events: ParsedEvent[] }) {

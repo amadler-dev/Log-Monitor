@@ -1,5 +1,5 @@
 import React from "react";
-import type { ParsedEvent } from "./Import";
+import type { ParsedEvent } from "./utils/analytics";
 import {
   ResponsiveContainer,
   BarChart,

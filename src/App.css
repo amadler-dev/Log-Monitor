@@ -1,100 +1,159 @@
-#root {
-  max-width: 1280px;
+:root {
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --accent-color: #1976d2;
+  --accent-light: #e3f2fd;
+  --border-color: #e0e0e0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --card-bg: #2b2b2b;
+    --text-primary: #ededed;
+    --text-secondary: #aaa;
+    --accent-color: #414141;
+    --accent-light: #0d47a1;
+    --border-color: #444;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  justify-content: center;
+}
+
+.dashboard-container {
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 20px;
+}
+
+.dashboard-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* File Dropzone */
+.file-dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
   padding: 2rem;
   text-align: center;
+  background-color: var(--card-bg);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 2rem;
 }
 
-.logo {
-  height: 6em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.file-dropzone:hover,
+.file-dropzone.drag-over {
+  border-color: var(--accent-color);
+  background-color: var(--accent-light);
+  color: var(--text-primary);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.dropzone-content p {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.sub-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Summary Cards */
+.dashboard-summary {
+  margin-bottom: 2rem;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.summary-card {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.summary-card h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.summary-card .value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 5px;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--border-color);
 }
 
-.read-the-docs {
-  color: #888;
-}
-.graph {
-  width: 1000px;
-}
-.no-logs {
-  margin-top: 15px;
+.chart-card {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
+.chart-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
 
+.full-width {
+  grid-column: 1 / -1;
+}
 
-
-/* select option button */
-select,
-::picker(select) {
-  appearance: base-select;
-}
-label {
-  width: fit-content;
-  align-self: center;
-}
-select {
-  border: 1px solid #999999;
-  padding: 8px 15px;
-  transition: 0.4s;
-}
-select::picker-icon {
-  color: #999999;
-  transition: 0.4s rotate;
-}
-select:open::picker-icon {
-  rotate: 180deg;
-}
-::picker(select) {
-  border: none;
-}
-option {
-  justify-content: flex-start;
-  gap: 20px;
-  border: 1px solid #999999;
-  padding: 10px;
-  transition: 0.4s;
-}
-option:first-of-type {
-  border-radius: 8px 8px 0 0;
-}
-option:last-of-type {
-  border-radius: 0 0 8px 8px;
-}
-::picker(select) {
-  border-radius: 8px;
-}
-option:not(option:last-of-type) {
-  border-bottom: none;
-}
-option:hover,
-option:focus {
-  background: #383838b2;
-}
-option .icon {
-  text-box: trim-both cap alphabetic;
-}
-option:checked {
-  font-weight: bold;
-}
+/* Override Recharts defaults for dark mode if needed (could be done via theme prop) */
+/* text { fill: var(--text-primary) !important; } */
