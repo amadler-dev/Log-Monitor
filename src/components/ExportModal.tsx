@@ -14,7 +14,8 @@ export default function ExportModal({ isOpen, onClose, onExport }: Props) {
         sessions: true,
         pageTimes: true,
         clicks: true,
-        device: true
+        device: true,
+        engagement: true
     });
 
     if (!isOpen) return null;
@@ -43,6 +44,7 @@ export default function ExportModal({ isOpen, onClose, onExport }: Props) {
                     <label><input type="checkbox" checked={options.pageTimes} onChange={() => toggle('pageTimes')} /> Page Durations</label>
                     <label><input type="checkbox" checked={options.clicks} onChange={() => toggle('clicks')} /> Clicks</label>
                     <label><input type="checkbox" checked={options.device} onChange={() => toggle('device')} /> Device & Screen Stats</label>
+                    <label><input type="checkbox" checked={options.engagement} onChange={() => toggle('engagement')} /> Engagement (Background/Active)</label>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '1.5rem' }}>

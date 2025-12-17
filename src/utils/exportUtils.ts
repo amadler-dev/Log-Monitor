@@ -4,7 +4,8 @@ import {
     calculateSummaryStats,
     groupByPeriod,
     getDeviceStats,
-    getResolutionStats
+    getResolutionStats,
+    calculateEngagementStats
 } from './analytics';
 
 export type ExportOptions = {
@@ -14,6 +15,7 @@ export type ExportOptions = {
     pageTimes: boolean;
     clicks: boolean;
     device: boolean;
+    engagement: boolean;
 };
 
 export function generateExcel(events: ParsedEvent[], options: ExportOptions) {
@@ -97,6 +99,21 @@ export function generateExcel(events: ParsedEvent[], options: ExportOptions) {
         utils.sheet_add_json(ws, resStats, { origin: "G2" });
 
         utils.book_append_sheet(wb, ws, "System Stats");
+        utils.book_append_sheet(wb, ws, "System Stats");
+    }
+
+    // 6. Engagement
+    if (options.engagement) {
+        const stats = calculateEngagementStats(events);
+        const data = [
+            ["Metric", "Value"],
+            ["Total Switches (Tab/Hidden)", stats.totalSwitches],
+            ["Total Background Time", stats.totalBackgroundTime + "s"],
+            ["Estimated Active Time", stats.activeTime + "s"],
+            ["Total Session Time", stats.totalSessionTime + "s"]
+        ];
+        const ws = utils.aoa_to_sheet(data);
+        utils.book_append_sheet(wb, ws, "Engagement");
     }
 
     writeFile(wb, "Analytics_Report.xlsx");
