@@ -56,7 +56,7 @@ function App() {
       <header className="dashboard-header">
         <h1>Log Analytics</h1>
         {events.length > 0 && (
-          <div style={{ marginTop: 10, display: 'flex', gap: 15, justifyContent: 'center', alignItems: 'center' }}>
+          <div className="header-controls">
             <span className="subtitle">{events.length} events loaded</span>
 
             <span

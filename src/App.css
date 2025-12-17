@@ -53,6 +53,16 @@ body {
   font-size: 0.9rem;
 }
 
+/* Header Controls */
+.header-controls {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /* File Dropzone */
 .file-dropzone {
   border: 2px dashed var(--border-color);
@@ -124,12 +134,6 @@ body {
   gap: 1.5rem;
 }
 
-@media (max-width: 1000px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .card {
   background: var(--card-bg);
   border-radius: 12px;
@@ -155,5 +159,54 @@ body {
   grid-column: 1 / -1;
 }
 
-/* Override Recharts defaults for dark mode if needed (could be done via theme prop) */
-/* text { fill: var(--text-primary) !important; } */
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  #root {
+    width: 100%;
+  }
+
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-header .subtitle {
+    display: block;
+    margin-top: 5px;
+  }
+
+  .header-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .chart-card {
+    min-height: 300px;
+    width: 86vw;
+  }
+
+  .file-dropzone {
+    padding: 1.5rem;
+  }
+}
+
+/* Tooltip fix for charts on mobile */
+.recharts-tooltip-wrapper {
+  z-index: 1000;
+}
