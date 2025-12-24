@@ -44,19 +44,21 @@ export default function ClicksChart({ events }: { events: ParsedEvent[] }) {
     return (
         <div style={{ width: "100%", marginTop: 20 }}>
             <h3>Clicks by Element</h3>
-            <div style={{ width: "100%", height: dynamicHeight }}>
-                <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={aggregated} layout="vertical" margin={{ top: 5, right: 30, left: 100, bottom: 5 }}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis type="number" />
-                        <YAxis dataKey="label" type="category" width={150} tick={{ fontSize: 11 }} />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="count" name="Click Count" fill="#ffc658">
-                            <LabelList dataKey="count" position="right" />
-                        </Bar>
-                    </BarChart>
-                </ResponsiveContainer>
+            <div style={{ width: "100%", height: dynamicHeight, display: "flex", flexDirection: "column" }}>
+                <div style={{ flex: 1, minHeight: 0, width: "100%" }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={aggregated} layout="vertical" margin={{ top: 5, right: 30, left: 100, bottom: 5 }}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis type="number" />
+                            <YAxis dataKey="label" type="category" width={150} tick={{ fontSize: 11 }} />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="count" name="Click Count" fill="#ffc658">
+                                <LabelList dataKey="count" position="right" />
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
         </div>
     );

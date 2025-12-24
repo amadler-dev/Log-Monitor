@@ -159,6 +159,14 @@ body {
   grid-column: 1 / -1;
 }
 
+.chart-card>div {
+  min-width: 0;
+  width: 100%;
+  /* Ensure they take full width */
+  min-height: 0;
+  flex: 1;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   #root {

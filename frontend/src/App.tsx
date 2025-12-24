@@ -25,7 +25,7 @@ function App() {
 
   const fetchLogs = async (ua: string = '') => {
     try {
-      let url = 'http://localhost:5000/api/logs';
+      let url = `${import.meta.env.VITE_API_BASE_URL}/api/logs`;
       if (ua) {
         url += `?userAgent=${encodeURIComponent(ua)}`;
       }
@@ -50,7 +50,7 @@ function App() {
 
   const fetchUserAgents = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/user-agents');
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/user-agents`);
       if (!res.ok) throw new Error('Failed to fetch user agents');
       const data = await res.json();
       setUserAgents(data);

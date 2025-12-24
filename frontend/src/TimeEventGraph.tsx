@@ -20,7 +20,7 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
   if (!events.length) return null;
 
   return (
-    <div style={{ width: "100%", height: "100%", minHeight: 400 }}>
+    <div style={{ width: "100%", minHeight: 400 }}>
       <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 20 }}>
         <label style={{ fontSize: 13 }}>Group by:</label>
         <select

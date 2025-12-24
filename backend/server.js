@@ -15,7 +15,7 @@ app.use(bodyParser.json({ limit: '50mb' })); // Support large payloads
 app.use(bodyParser.text({ type: 'application/x-ndjson' })); // Support JSONL if sent as raw text
 
 // Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/log-monitor', {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })

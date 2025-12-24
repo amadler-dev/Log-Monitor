@@ -148,7 +148,7 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
   // if (!pairs.length) return <div className="no-logs">No matching start - close pairs found</div>;
 
   return (
-    <div style={{ width: "100%", height: 400, marginTop: 20 }}>
+    <div style={{ width: "100%", height: 400, marginTop: 20, display: "flex", flexDirection: "column", minWidth: 0 }}>
       {/* Controls ... */}
       <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 8 }}>
         <label style={{ fontSize: 13 }}>Group by:</label>
@@ -171,27 +171,29 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
         </div>
       </div>
 
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={aggregated} margin={{ top: 12, right: 24, left: 12, bottom: 80 }}>
-          <CartesianGrid stroke="#f0f0f0" />
-          <XAxis dataKey="label" angle={-45} textAnchor="end" interval={0} height={70} tick={{ fontSize: 12 }} />
-          <YAxis tick={{ fontSize: 12 }} />
-          <Tooltip
-            formatter={(value: number, name: string) => {
-              if (name === "sumHours") return [`${value} h`, "sum"];
-              if (name === "avgMinutes") return [`${value} s`, "avg"];
-              if (name === "count") return [value, "count"];
-              return [value, name];
-            }}
-            labelFormatter={(label) => `Period: ${label}`}
-          />
-          <Legend />
-          {metric === "sum" && <Bar dataKey="sumHours" name="sum hours" fill="#1976d2" />}
-          {metric === "avg" && <Bar dataKey="avgMinutes" name="avg minutes" fill="#ff8f00" />}
-          {metric === "count" && <Bar dataKey="count" name="count" fill="#2e7d32" />}
-          <Brush dataKey="label" height={40} stroke="#8884d8" travellerWidth={10} />
-        </BarChart>
-      </ResponsiveContainer>
+      <div style={{ flex: 1, minHeight: 0, width: "100%" }}>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={aggregated} margin={{ top: 12, right: 24, left: 12, bottom: 80 }}>
+            <CartesianGrid stroke="#f0f0f0" />
+            <XAxis dataKey="label" angle={-45} textAnchor="end" interval={0} height={70} tick={{ fontSize: 12 }} />
+            <YAxis tick={{ fontSize: 12 }} />
+            <Tooltip
+              formatter={(value: number, name: string) => {
+                if (name === "sumHours") return [`${value} h`, "sum"];
+                if (name === "avgMinutes") return [`${value} s`, "avg"];
+                if (name === "count") return [value, "count"];
+                return [value, name];
+              }}
+              labelFormatter={(label) => `Period: ${label}`}
+            />
+            <Legend />
+            {metric === "sum" && <Bar dataKey="sumHours" name="sum hours" fill="#1976d2" />}
+            {metric === "avg" && <Bar dataKey="avgMinutes" name="avg minutes" fill="#ff8f00" />}
+            {metric === "count" && <Bar dataKey="count" name="count" fill="#2e7d32" />}
+            <Brush dataKey="label" height={40} stroke="#8884d8" travellerWidth={10} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }

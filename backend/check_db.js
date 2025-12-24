@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const LogEntry = require('./models/LogEntry');
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/log-monitor', {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
