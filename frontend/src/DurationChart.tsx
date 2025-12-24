@@ -171,8 +171,8 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
         </div>
       </div>
 
-      <div style={{ flex: 1, minHeight: 0, width: "100%" }}>
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="chart-container">
+        <ResponsiveContainer width="100%" height={400}>
           <BarChart data={aggregated} margin={{ top: 12, right: 24, left: 12, bottom: 80 }}>
             <CartesianGrid stroke="#f0f0f0" />
             <XAxis dataKey="label" angle={-45} textAnchor="end" interval={0} height={70} tick={{ fontSize: 12 }} />

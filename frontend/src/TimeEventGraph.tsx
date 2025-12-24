@@ -20,7 +20,7 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
   if (!events.length) return null;
 
   return (
-    <div style={{ width: "100%", minHeight: 400 }}>
+    <div style={{ width: "100%", height: 400 }}>
       <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 20 }}>
         <label style={{ fontSize: 13 }}>Group by:</label>
         <select
@@ -39,7 +39,7 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
         </div>
       </div>
 
-      <ResponsiveContainer width="100%" height={320}>
+      <ResponsiveContainer width="100%" height={320} minWidth={0} minHeight={0} debounce={100}>
         <BarChart data={aggregated} margin={{ top: 10, right: 10, left: 0, bottom: 20 }}>
           <CartesianGrid stroke="#eee" vertical={false} />
           <XAxis

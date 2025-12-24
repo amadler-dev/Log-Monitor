@@ -19,10 +19,10 @@ export default function ResolutionChart({ events }: { events: ParsedEvent[] }) {
     if (!events.length) return null;
 
     return (
-        <div style={{ height: 400, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ height: 400, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
             <h3 style={{ textAlign: 'center' }}>Screen Resolutions</h3>
-            <div style={{ flex: 1, minHeight: 0, width: "100%" }}>
-                <ResponsiveContainer width="100%" height="100%">
+            <div style={{ height: 350, width: "100%", minWidth: 0 }}>
+                <ResponsiveContainer width="100%" height={400} debounce={100}>
                     <BarChart
                         layout="vertical"
                         data={data}

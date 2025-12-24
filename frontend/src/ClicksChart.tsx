@@ -44,9 +44,9 @@ export default function ClicksChart({ events }: { events: ParsedEvent[] }) {
     return (
         <div style={{ width: "100%", marginTop: 20 }}>
             <h3>Clicks by Element</h3>
-            <div style={{ width: "100%", height: dynamicHeight, display: "flex", flexDirection: "column" }}>
-                <div style={{ flex: 1, minHeight: 0, width: "100%" }}>
-                    <ResponsiveContainer width="100%" height="100%">
+            <div style={{ width: "100%", height: dynamicHeight, display: "flex", flexDirection: "column", minWidth: 0 }}>
+                <div style={{ height: dynamicHeight, width: "100%" }}>
+                    <ResponsiveContainer width="100%" height={350} debounce={100}>
                         <BarChart data={aggregated} layout="vertical" margin={{ top: 5, right: 30, left: 100, bottom: 5 }}>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis type="number" />

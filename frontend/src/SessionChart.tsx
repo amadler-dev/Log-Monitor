@@ -43,7 +43,7 @@ export default function SessionChart({ events }: { events: ParsedEvent[] }) {
     if (!events.length) return null;
 
     return (
-        <div style={{ width: "100%", minHeight: 300 }}>
+        <div style={{ width: "100%", height: 400 }}>
             <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 8 }}>
                 <h3>Session Statistics</h3>
                 <select
@@ -55,7 +55,7 @@ export default function SessionChart({ events }: { events: ParsedEvent[] }) {
                     <option value="week">Weekly</option>
                 </select>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={400} minWidth={0} minHeight={0} debounce={100}>
                 <BarChart data={aggregated} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="label" tick={{ fontSize: 12, fill: '#888' }} />

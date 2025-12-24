@@ -41,7 +41,7 @@ export default function EngagementChart({ events }: { events: ParsedEvent[] }) {
             </div>
 
             <div style={{ flex: 2, height: 300, minWidth: 0 }}>
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height={350} debounce={100}>
                     <PieChart>
                         <Pie
                             data={chartData}

@@ -19,10 +19,10 @@ export default function DeviceChart({ events }: { events: ParsedEvent[] }) {
 
     return (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
-            <div style={{ height: 300, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ height: 300, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
                 <h4 style={{ textAlign: 'center', marginBottom: 10 }}>Browser Distribution</h4>
-                <div style={{ flex: 1, minHeight: 0, width: "100%" }}>
-                    <ResponsiveContainer width="100%" height="100%">
+                <div style={{ height: 260, width: "100%", minWidth: 0 }}>
+                    <ResponsiveContainer width="100%" height={350}>
                         <PieChart>
                             <Pie
                                 data={browserData}
@@ -45,10 +45,10 @@ export default function DeviceChart({ events }: { events: ParsedEvent[] }) {
                 </div>
             </div>
 
-            <div style={{ height: 300, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ height: 300, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
                 <h4 style={{ textAlign: 'center', marginBottom: 10 }}>OS Distribution</h4>
-                <div style={{ flex: 1, minHeight: 0, width: "100%" }}>
-                    <ResponsiveContainer width="100%" height="100%">
+                <div style={{ height: 260, width: "100%", minWidth: 0 }}>
+                    <ResponsiveContainer width="100%" height={350} debounce={100}>
                         <PieChart>
                             <Pie
                                 data={osData}
