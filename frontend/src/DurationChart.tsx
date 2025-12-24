@@ -148,7 +148,8 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
   // if (!pairs.length) return <div className="no-logs">No matching start - close pairs found</div>;
 
   return (
-    <div style={{ width: "100%", height: 360, marginTop: 100 }}>
+    <div style={{ width: "100%", height: 400, marginTop: 20 }}>
+      {/* Controls ... */}
       <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 8 }}>
         <label style={{ fontSize: 13 }}>Group by:</label>
         <select value={period} onChange={(e) => setPeriod(e.target.value as Period)}>
@@ -170,7 +171,7 @@ export default function DurationChart({ events }: { events: ParsedEvent[] }) {
         </div>
       </div>
 
-      <ResponsiveContainer width={1000} height={400}>
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart data={aggregated} margin={{ top: 12, right: 24, left: 12, bottom: 80 }}>
           <CartesianGrid stroke="#f0f0f0" />
           <XAxis dataKey="label" angle={-45} textAnchor="end" interval={0} height={70} tick={{ fontSize: 12 }} />

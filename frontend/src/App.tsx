@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import type { ParsedEvent } from './utils/analytics';
 import { generateExcel } from './utils/exportUtils';
@@ -20,13 +20,75 @@ function App() {
   const [loadedFiles, setLoadedFiles] = useState<Set<string>>(new Set());
   const [isExportOpen, setIsExportOpen] = useState(false);
 
+  const [userAgents, setUserAgents] = useState<string[]>([]);
+  const [selectedUserAgent, setSelectedUserAgent] = useState<string>('');
+
+  const fetchLogs = async (ua: string = '') => {
+    try {
+      let url = 'http://localhost:5000/api/logs';
+      if (ua) {
+        url += `?userAgent=${encodeURIComponent(ua)}`;
+      }
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Failed to fetch logs');
+      const data: any[] = await res.json();
+
+      // Ensure dates are parsed correctly if they are strings
+      const parsedData = data.map(d => ({
+        ...d,
+        ts: d.timestamp ? new Date(d.timestamp).getTime() : Date.now(),
+        time: d.timestamp || new Date().toISOString()
+      })) as ParsedEvent[];
+      // Sort
+      parsedData.sort((a, b) => a.ts - b.ts);
+
+      handleLoad(parsedData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const fetchUserAgents = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/user-agents');
+      if (!res.ok) throw new Error('Failed to fetch user agents');
+      const data = await res.json();
+      setUserAgents(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // Initial fetch
+  useEffect(() => {
+    fetchLogs();
+    fetchUserAgents();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleUserAgentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const ua = e.target.value;
+    setSelectedUserAgent(ua);
+    // Clear current events to show only filtered ones? Or filter locally?
+    // User asked to choose which User Agent to see.
+    // Let's clear and re-fetch for simplicity or filter current?
+    // Given the backend has filtering, let's use it.
+    setEvents([]);
+    fetchLogs(ua);
+  };
+
   const handleLoad = (newEvents: ParsedEvent[]) => {
     setEvents(prev => {
+      // Backend might return duplicates if we fetch multiple times?
+      // But here we are replacing mostly?
+      // If we use file dropzone AND api, we might want to merge. 
+      // Current logic merges.
       const merged = [...prev, ...newEvents];
       const seen = new Set<string>();
 
       const deduped = merged.filter(e => {
-        const key = `${e.ts}|${e.source ?? ""}|${e.type}|${e.url}`;
+        // Fix key generation to use timestamp from backend which might be 'timestamp' or mapped 'ts'
+        const ts = e.ts || new Date((e as any).timestamp).getTime();
+        const key = `${ts}|${e.userAgent ?? e.source ?? ""}|${e.type}|${e.url}`;
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
@@ -36,11 +98,12 @@ function App() {
       return deduped;
     });
 
-    // Update loaded files list
+    // Update loaded files list (mock source for API)
     setLoadedFiles(prev => {
       const next = new Set(prev);
       newEvents.forEach(e => {
         if (e.source) next.add(e.source);
+        else next.add('API');
       });
       return next;
     });
@@ -59,12 +122,27 @@ function App() {
           <div className="header-controls">
             <span className="subtitle">{events.length} events loaded</span>
 
+            <select
+              value={selectedUserAgent}
+              onChange={handleUserAgentChange}
+              style={{
+                padding: '6px',
+                borderRadius: '4px',
+                marginRight: '10px'
+              }}
+            >
+              <option value="">All Users</option>
+              {userAgents.map(ua => (
+                <option key={ua} value={ua}>{ua.substring(0, 50)}...</option>
+              ))}
+            </select>
+
             <span
               className="subtitle"
               title={Array.from(loadedFiles).join('\n')}
               style={{ cursor: 'help', textDecoration: 'underline dotted' }}
             >
-              {loadedFiles.size} Files Loaded
+              {loadedFiles.size} Sources
             </span>
 
             <button
