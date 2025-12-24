@@ -1,44 +1,71 @@
-# Log Monitor
+# Log Analytics Dashboard
 
-A small React + TypeScript + Vite app to import browser/event JSON logs and visualize them as interactive timelines and aggregated charts. Designed to help inspect event sequences (e.g. "homepage loaded", "page closed") across one or more log files, and to compute durations between events.
+A modern full-stack application for monitoring and analyzing user activity logs.
 
 ## Features
-- Import one or multiple JSON log files (merge + deduplicate).
-- Interactive timeline (Recharts) with per-event markers and brush/zoom.
-- Aggregated stacked bar chart grouped by hour/day/week/month (counts per event type).
-- Duration chart: sum / average / count of time from an event to the next "page closed".
-- Source-aware events (filename stored) and optional filtering by event label / source.
 
-## JSON log format
-Expect a JSON object mapping ISO timestamps to event strings, e.g.:
-- {
--   "2025-10-19T14:23:30Z": "homepage loaded",
--   "2025-10-19T14:24:05Z": "page closed"
-- }
+-   **Backend Data Ingestion**: Simple REST API (`POST /api/logs`) to receive JSONL log data.
+-   **MongoDB Storage**: Scalable storage of log entries.
+-   **Interactive Dashboard**:
+    -   Visualize user activity over time.
+    -   Analyze session durations and engagement.
+    -   Track page views, clicks, and device statistics.
+    -   Filter data by User Agent.
+-   **Excel Export**: Export filtered data for further analysis.
+-   **Local File Import**: Drag and drop support for `json` and `jsonl` files.
 
-Any event label not recognized as "homepage loaded" or "page closed" is treated as "other".
-At the moment this means "formation loaded".
+## Technology Stack
 
-## Quick start (Windows)
-1. Install deps:
-   - Open terminal in project root
-   - npm install
-2. Run dev server:
-   - npm run dev
-3. Open the app in your browser (Vite prints the URL).
+-   **Frontend**: React, TypeScript, Vite, Recharts
+-   **Backend**: Node.js, Express, Mongoose
+-   **Database**: MongoDB
+
+## Getting Started
+
+### Prerequisites
+
+-   Node.js (v16+)
+-   MongoDB (running locally on default port 27017)
+
+### Installation
+
+1.  **Clone the repository**
+2.  **Install Frontend Dependencies**:
+    ```bash
+    cd frontend
+    npm install
+    ```
+3.  **Install Backend Dependencies**:
+    ```bash
+    cd backend
+    npm install
+    ```
+
+### Running the Application
+
+1.  **Start MongoDB**: Ensure your MongoDB instance is running.
+2.  **Start Backend Server**:
+    ```bash
+    cd backend
+    npm run dev
+    ```
+    (Runs on `http://localhost:5000`)
+3.  **Start Frontend Dev Server**:
+    ```bash
+    cd frontend
+    npm run dev
+    ```
+    (Runs on `http://localhost:5173`)
+
+## API Endpoints
+
+-   `POST /api/logs`: Ingest logs (accepts JSON array or JSONL).
+-   `GET /api/logs`: Fetch logs (supports `userAgent` query param).
+-   `GET /api/user-agents`: Get list of unique user agents.
 
 ## Usage
-- Click "Import JSON files" and select one or more .json files (hold Ctrl / Shift for multiple).
-- Timeline chart: view events across time; use the brush to zoom to a specific range.
-- Aggregate chart: choose grouping (hour/day/week/month) to see stacked counts.
-- Duration chart: compute durations from a start event to the next "page closed"; switch metric (sum / avg / count) and grouping.
 
-## Tips & Troubleshooting
-- If a file doesn't parse, open DevTools console — the importer logs per-file errors.
-- The importer strips common BOM/comments; for tricky files you can rename or validate JSON with a linter.
-- For large datasets, increase aggregation server-side or reduce bin granularity.
-
-## Development notes
-- Built with Vite + React + TypeScript.
-- Charts use Recharts; install via npm if missing.
-- Files are merged and deduplicated by timestamp + source + event.
+-   Open the dashboard in your browser.
+-   Data fetched from the backend is displayed automatically.
+-   Use the dropdown to filter by User Agent.
+-   Drag and drop additional local log files if needed.
