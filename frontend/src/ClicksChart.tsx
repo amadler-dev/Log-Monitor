@@ -66,7 +66,6 @@ export default function ClicksChart({ events }: { events: ParsedEvent[] }) {
                     <select
                         value={selectedUrl}
                         onChange={(e) => setSelectedUrl(e.target.value)}
-                        style={{ padding: "4px 8px", borderRadius: 4, borderColor: "#ccc" }}
                     >
                         <option value="all">All Pages</option>
                         {uniqueUrls.map(url => (

@@ -49,7 +49,6 @@ export default function SessionChart({ events }: { events: ParsedEvent[] }) {
                 <select
                     value={period}
                     onChange={(e) => setPeriod(e.target.value as Period)}
-                    style={{ borderRadius: 6, border: '1px solid #ccc', padding: '4px 8px' }}
                 >
                     <option value="day">Daily</option>
                     <option value="week">Weekly</option>

@@ -27,7 +27,6 @@ export default function TimeEventGraph({ events }: { events: ParsedEvent[] }) {
           id="event-select"
           value={period}
           onChange={(e) => setPeriod(e.target.value as Period)}
-          style={{ borderRadius: 6, border: '1px solid #ccc', padding: '4px 8px' }}
         >
           <option value="hour">Hour</option>
           <option value="day">Day</option>
